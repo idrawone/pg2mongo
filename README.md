@@ -58,6 +58,17 @@ $ mongo --host localhost --port 27017
 $ docker run -it --rm --network p2m-network postgres:12.2 psql -h pg1 -U wal2mongo --password
 ```
 
+#### log into to containers
+```
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                      NAMES
+fa0a79d5d64b        mongo:4.2.5         "/usr/bin/mongod --b…"   7 minutes ago       Up 7 minutes        0.0.0.0:27017->27017/tcp   mongo
+26d4424dd115        postgres:12.2       "/usr/pgsql-12/bin/p…"   7 minutes ago       Up 7 minutes        0.0.0.0:5432->5432/tcp     pg1
+
+$ docker exec -it pg1 bash
+$ docker exec -it mongo bash
+```
+
 #### stop and remove containers
 ```
 $ docker container stop $(docker container ls -aq)
