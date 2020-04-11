@@ -13,6 +13,7 @@ RUN yum -y install git gcc make clang zlib-devel readline-devel postgresql12-dev
 RUN echo 'root:root' | chpasswd
 RUN echo 'postgres:postgres' | chpasswd
 RUN usermod -aG wheel postgres
+RUN echo "export PATH=/usr/pgsql-12/bin:$PATH" | tee -a /var/lib/pgsql/.bashrc
 RUN echo "postgres ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/postgres && \
 		chmod 0440 /etc/sudoers.d/postgres
 
