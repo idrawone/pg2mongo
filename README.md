@@ -58,7 +58,7 @@ $ mongo --host localhost --port 27017
 $ docker run -it --rm --network p2m-network postgres:12.2 psql -h pg1 -U wal2mongo --password
 ```
 
-#### log into to containers
+#### log into to containers and perform some check
 ```
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                      NAMES
@@ -66,7 +66,16 @@ fa0a79d5d64b        mongo:4.2.5         "/usr/bin/mongod --b…"   7 minutes ago
 26d4424dd115        postgres:12.2       "/usr/pgsql-12/bin/p…"   7 minutes ago       Up 7 minutes        0.0.0.0:5432->5432/tcp     pg1
 
 $ docker exec -it pg1 bash
+bash-4.2$ export PATH=/usr/pgsql-12/bin:$PATH
+bash-4.2$ USE_PGXS=1 make installcheck-force
+or 
+bash-4.2$ USE_PGXS=1 make installcheck-force CLANG=/usr/bin/clang with_llvm=no
 $ docker exec -it mongo bash
+[root@fa0a79d5d64b /]# ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 05:52 ?        00:00:06 /usr/bin/mongod --bind_ip_all
+root        43     0  1 06:09 pts/0    00:00:00 bash
+root        57    43  0 06:09 pts/0    00:00:00 ps -ef
 ```
 
 #### stop and remove containers
