@@ -30,13 +30,13 @@ docker run --name mongo --network p2m-network -p 27017:27017 -d mongo:4.2.5
 
 #### build containers with volume
 ```
-docker run --name pg1 --network p2m-network -v pgdata:/var/lib/pgsql/12/data/ -d postgres:12.2
+docker run --name pg1 --network p2m-network -v pg1data:/var/lib/pgsql/12/data/ -d postgres:12.2
 docker run --name mongo --network p2m-network -v mgdata:/data/db -d mongo:4.2.5
 ```
 
 #### build containers with volume and map the ports to localhost
 ```
-docker run --name pg1 --network p2m-network -v pgdata:/var/lib/pgsql/12/data/ -p 5432:5432 -d postgres:12.2
+docker run --name pg1 --network p2m-network -v pg1data:/var/lib/pgsql/12/data/ -p 5432:5432 -d postgres:12.2
 docker run --name mongo --network p2m-network -v mgdata:/data/db -p 27017:27017 -d mongo:4.2.5
 ```
 
