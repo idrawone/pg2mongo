@@ -8,6 +8,7 @@ services:
       - "27017:27017"
     volumes:
       - ./data/mgdata:/data/db
+      - ./scripts/p2m.sh:/p2m.sh
 
   pg1:
     restart: always
