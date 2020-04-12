@@ -18,19 +18,12 @@ RUN echo "postgres ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/postgres && \
 		chmod 0440 /etc/sudoers.d/postgres
 
 USER postgres
+COPY run.sh .
 COPY build.sh .
 RUN ./build.sh
-
-RUN /usr/pgsql-12/bin/initdb -D /var/lib/pgsql/12/data/
-RUN /usr/pgsql-12/bin/pg_ctl -D /var/lib/pgsql/12/data/ -l /tmp/logfile start && \
-	psql --command "CREATE USER wal2mongo WITH SUPERUSER PASSWORD 'wal2mongo';" && \
-	createdb -O wal2mongo wal2mongo 
-RUN echo "host  all  all  0.0.0.0/0  trust" >> /var/lib/pgsql/12/data/pg_hba.conf
-RUN echo "listen_addresses='*'" >> /var/lib/pgsql/12/data/postgresql.conf
-RUN echo "wal_level = logical"  >> /var/lib/pgsql/12/data/postgresql.conf
 
 VOLUME  ["/var/log/pgsql", "/var/lib/pgsql"]
 
 EXPOSE 5432
-
-CMD ["/usr/pgsql-12/bin/postgres", "-D", "/var/lib/pgsql/12/data"]
+CMD ["/run.sh"]
+#CMD ["/usr/pgsql-12/bin/postgres", "-D", "/var/lib/pgsql/12/data"]
