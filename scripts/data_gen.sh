@@ -2,8 +2,6 @@
 
 set -m
 
-source /var/lib/pgsql/.bashrc
-
 if [[ "$1" == "-h" ]]; then
 	echo "Usage:"
 	echo "  * Outside of the container:"
@@ -14,6 +12,7 @@ if [[ "$1" == "-h" ]]; then
 	exit 0
 fi
 
+source /var/lib/pgsql/.bashrc
 pgbench -i -p 5432 -d postgres
 status=$?
 if [ $status -ne 0 ]; then
