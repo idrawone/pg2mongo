@@ -1,7 +1,3 @@
-### help
-### docker exec -it pg2mongo_mongo_1 bash /p2m.sh 1 2
-###
-
 #!/bin/bash
 
 set -m
@@ -30,15 +26,13 @@ do
 	pg_recvlogical -d postgres -h pg2mongo_pg${i}_1 -U postgres --slot w2m_slot${i} --start -f /tmp/pipe-pg${i} &
 	status=$?
 	if [ $status -ne 0 ]; then
-		echo "Failed to start my_first_process: $status"
-		echo "pg2mongo_pg${i}_1 $status"
+		echo "Failed to start pg_recvlogical: $status"
 	fi
 
 	mongo < /tmp/pipe-pg${i} &
 	status=$?
 	if [ $status -ne 0 ]; then
-		echo "Failed to start my_first_process: $status"
-		echo "mongo < /tmp/pipe-pg${i} $status"
+		echo "Failed to start mongo < /tmp/pipe-pg${i}: $status"
 	fi
 	sleep 1;
 

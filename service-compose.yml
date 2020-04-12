@@ -22,6 +22,7 @@ services:
       CLUSTER_NODE_ID: pg1
     volumes:
       - ./data/pg1data:/var/lib/pgsql/12/data
+      - ./scripts/data_gen.sh:/data_gen.sh
 
   pg2:
     restart: always
@@ -35,4 +36,5 @@ services:
       CLUSTER_NODE_ID: pg2
     volumes:
       - ./data/pg2data:/var/lib/pgsql/12/data
+      - ./scripts/data_gen.sh:/data_gen.sh
 
