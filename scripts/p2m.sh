@@ -2,8 +2,6 @@
 
 set -m
 
-source /root/.bashrc
-
 if [[ $# -eq 0 || "$1" == "-h" ]]; then
 	echo "Usage:"
 	echo "  * Outside of the container:"
@@ -14,6 +12,7 @@ if [[ $# -eq 0 || "$1" == "-h" ]]; then
 	exit 0
 fi
 
+source /root/.bashrc
 for i in $@
 do
 	if [ -p "/tmp/pipe-pg${i}" ]; then
@@ -21,7 +20,7 @@ do
 	else
 		mkfifo /tmp/pipe-pg${i}
 	fi
-	pg_recvlogical -d postgres -h pg2mongo_pg${i}_1 -U postgres --slot w2m_slot${1} --create-slot --plugin=wal2mongo 
+	pg_recvlogical -d postgres -h pg2mongo_pg${i}_1 -U postgres --slot w2m_slot${i} --create-slot --plugin=wal2mongo
 	sleep 1;
 	pg_recvlogical -d postgres -h pg2mongo_pg${i}_1 -U postgres --slot w2m_slot${i} --start -f /tmp/pipe-pg${i} &
 	status=$?
