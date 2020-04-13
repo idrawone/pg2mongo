@@ -17,7 +17,7 @@ cd pg2mongo
 
 #### 3. start container and setup logical replication slots on `pg2mongo_mongo_1`
 ```
-./start.sh  15
+./start.sh  30
 ```
 
 #### 4. generate databse traffic on containers `pg2mongo_pg1_1` and `pg2mongo_pg2_1`
