@@ -131,7 +131,7 @@ root        43     0  1 06:09 pts/0    00:00:00 bash
 root        57    43  0 06:09 pts/0    00:00:00 ps -ef
 ```
 
-### Notes: below commands is for demo purpose, don't run these commands unless that the results is what you expected.
+### Notes: below commands is for demo purpose, don't run these commands unless "the results" is what you expected.
 #### stop and remove containers (all containers will be removed)
 ```
 $ docker container stop $(docker container ls -aq)
