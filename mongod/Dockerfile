@@ -1,9 +1,5 @@
-FROM centos:centos7
-MAINTAINER The CentOS Project <cloud-ops@centos.org>
-
-RUN yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-RUN yum -y update; yum clean all
-RUN yum -y install epel-release yum-utils sudo net-tools which; yum clean all
+FROM centos7-base
+MAINTAINER iDrawone <idrawone@gmail.com>
 
 COPY mongodb.repo /etc/yum.repos.d/
 
@@ -22,7 +18,6 @@ RUN echo "mongod ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/mongod && \
 RUN echo "export PATH=/usr/pgsql-12/bin:$PATH" | tee -a /root/.bashrc
 
 VOLUME  ["/data/db", "/var/lib/mongo", "/var/log/mongodb"]
-
-
 EXPOSE 27017
+
 ENTRYPOINT ["/usr/bin/mongod", "--bind_ip_all"]

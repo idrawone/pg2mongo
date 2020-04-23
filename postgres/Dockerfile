@@ -1,12 +1,6 @@
-FROM centos:centos7
-MAINTAINER The CentOS Project <cloud-ops@centos.org>
+FROM centos7-base
+MAINTAINER iDrawone <idrawone@gmail.com>
 
-RUN yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-
-RUN yum -y update; yum clean all
-RUN yum -y install sudo epel-release yum-utils net-tools which; yum clean all
-
-#RUN yum-config-manager --enable pgdg12
 RUN yum -y install postgresql12-server postgresql12; yum clean all
 RUN yum -y install git gcc make clang zlib-devel readline-devel postgresql12-devel; yum clean all
 
@@ -23,7 +17,7 @@ COPY build.sh .
 RUN ./build.sh
 
 VOLUME  ["/var/log/pgsql", "/var/lib/pgsql"]
-
 EXPOSE 5432
+
 CMD ["/run.sh"]
 #CMD ["/usr/pgsql-12/bin/postgres", "-D", "/var/lib/pgsql/12/data"]

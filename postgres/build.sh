@@ -1,6 +1,5 @@
 #!/bin/bash
-
-#set -x
+set -m
 
 export PATH=/usr/pgsql-12/bin:$PATH
 
@@ -12,52 +11,56 @@ retval=0
 
 ExecuteCommand()
 {
-    eval ${@}
-    r=$?
+	eval ${@}
+	r=$?
 
-    if [[ $r -ne 0 ]];
-    then
-        echo "${@} returned nonzero error code [$r]."
-    fi
+	if [[ $r -ne 0 ]];
+	then
+		echo "${@} returned nonzero error code [$r]."
+		exit $r
+	fi
 }
 
 PushD()
 {
-    ExecuteCommand "pushd $@"
+	ExecuteCommand "pushd $@"
 }
 
 PopD()
 {
-    ExecuteCommand "popd"
+	ExecuteCommand "popd"
 }
 
 checkout_sources()
 {
-    echo "Checkout sources"
-    git clone https://github.com/HighgoSoftware/wal2mongo.git "$SOURCE_DIR"
+	echo "Checking out wal2mongo"
+	git clone https://github.com/HighgoSoftware/wal2mongo.git "$SOURCE_DIR"
 }
 
 package_make()
 {
-    PushD ${SOURCE_DIR}
-    ExecuteCommand "USE_PGXS=1 make CLANG=/usr/bin/clang with_llvm=no"
-    PopD
+	PushD ${SOURCE_DIR}
+	echo "Compiling wal2mongo"
+	ExecuteCommand "USE_PGXS=1 make CLANG=/usr/bin/clang with_llvm=no"
+	PopD
 }
 
 package_make_install()
 {
-    PushD ${SOURCE_DIR}
-    ExecuteCommand "sudo -E env "PATH=$PATH" USE_PGXS=1 make CLANG=/usr/bin/clang with_llvm=no install"
-    PopD
+	PushD ${SOURCE_DIR}
+	echo "Installing wal2mongo"
+	ExecuteCommand "sudo -E env "PATH=$PATH" USE_PGXS=1 make CLANG=/usr/bin/clang with_llvm=no install"
+	PopD
 }
 
 
 build()
 {
-    echo "Start build"
-    checkout_sources
-    package_make
-    package_make_install
+	echo "Starting build wal2mongo"
+	checkout_sources
+	package_make
+	package_make_install
+	retval=$?
 }
 
 
