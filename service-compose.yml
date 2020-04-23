@@ -1,11 +1,11 @@
-version: '2.2'
+version: '3.0'
 
 services:
   mongo:
     restart: always
     image: "mongod:4.2.5"
     ports:
-      - "27017:27017"
+      - "27017"
     volumes:
       - ./data/mgdata:/data/db
       - ./scripts/p2m.sh:/p2m.sh
@@ -14,12 +14,7 @@ services:
     restart: always
     image: "postgres:12.2"
     ports:
-      - "54321:5432"
-    environment:
-      POSTGRES_DB: wal2mongo
-      POSTGRES_PASSWORD: wal2mongo
-      PG_HOST: pg1
-      CLUSTER_NODE_ID: pg1
+      - "5432"
     volumes:
       - ./data/pg1data:/var/lib/pgsql/12/data
       - ./scripts/data_gen.sh:/data_gen.sh
@@ -28,12 +23,7 @@ services:
     restart: always
     image: "postgres:12.2"
     ports:
-      - "54322:5432"
-    environment:
-      POSTGRES_DB: wal2mongo
-      POSTGRES_PASSWORD: wal2mongo
-      PG_HOST: pg2
-      CLUSTER_NODE_ID: pg2
+      - "5432"
     volumes:
       - ./data/pg2data:/var/lib/pgsql/12/data
       - ./scripts/data_gen.sh:/data_gen.sh
