@@ -18,10 +18,13 @@ before_install:
  - echo `uname -a`
 
 script:
- - ./build-images.sh
- - ./start.sh  60
- - docker ps
  - echo `date`
+ - ./build-images.sh
+ - ./start.sh 
+ - docker ps
+ - docker logs pg2mongo_pg1_1
+ - docker exec -it pg2mongo_mongo_1 bash /p2m.sh 1 2
+ - docker logs pg2mongo_mongo_1
  - docker exec -it pg2mongo_pg2_1 bash /data_gen.sh
  - echo `date`
 
