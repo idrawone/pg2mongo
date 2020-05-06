@@ -13,8 +13,9 @@ before_install:
  - sudo mv docker-compose /usr/local/bin
  - docker --version
  - docker-compose --version
- - which git
- - sudo apt install git
+ - echo `which git`
+ - echo $PWD
+ - echo `uname -a`
 
 #script:
 #  - docker-compose build
