@@ -14,7 +14,6 @@ RUN echo "postgres ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/postgres && \
 USER postgres
 COPY run.sh .
 COPY build.sh .
-COPY p2m.sh .
 COPY data_gen.sh .
 
 RUN ./build.sh
