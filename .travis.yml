@@ -17,7 +17,14 @@ before_install:
  - echo $PWD
  - echo `uname -a`
 
-#script:
+script:
+ - ./build-images.sh
+ - ./start.sh  60
+ - docker ps
+ - echo `date`
+ - docker exec -it pg2mongo_pg2_1 bash /data_gen.sh
+ - echo `date`
+
 #  - docker-compose build
 #  - docker-compose run test
 
