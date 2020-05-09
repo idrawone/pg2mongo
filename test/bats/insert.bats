@@ -24,7 +24,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 20;
+  sleep 30;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc006-mg.txt
   assert_success
   assert_match "9876"
@@ -36,7 +36,7 @@ load assertions.bash
   assert_success
 
   # check replication results
-  sleep 20;
+  sleep 30;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc007-mg.txt
   assert_success
   assert_match "5432"
@@ -47,7 +47,7 @@ load assertions.bash
   assert_success
 
   # check the replication results
-  sleep 20;
+  sleep 30;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc008-mg.txt
   assert_success
   assert_match "4321"

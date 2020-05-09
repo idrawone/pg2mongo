@@ -25,7 +25,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc009-mg.txt
   assert_success
   assert_match "a.*true"
@@ -37,7 +37,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc010-mg.txt
   assert_success
   assert_match "a.*-32768"
@@ -49,7 +49,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc011-mg.txt
   assert_success
   assert_match "a.*-2147483648"
@@ -61,7 +61,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc012-mg.txt
   assert_success
   assert_match "a.*123456"
@@ -73,7 +73,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc013-mg.txt
   assert_success
   assert_match "a.*0.123456"
@@ -85,7 +85,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc014-mg.txt
   assert_success
   assert_match "a.*-9223372036854775808"
@@ -97,7 +97,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc015-mg.txt
   assert_success
   assert_match "a.*1234567890"
@@ -109,7 +109,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc016-mg.txt
   assert_success
   assert_match "a.*-1.123456789123456"
@@ -121,7 +121,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc017-mg.txt
   assert_success
   assert_match "a.*-1234567890.1234567891"
@@ -133,7 +133,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc018-mg.txt
   assert_success
   assert_match "a.*-9876543210.0987654321"
@@ -145,7 +145,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc019-mg.txt
   assert_success
   assert_match "a.*a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
@@ -157,7 +157,7 @@ load assertions.bash
   assert_success
   
   # check replication results
-  sleep 1;
+  sleep 3;
   run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc020-mg.txt
   assert_success
   assert_match "a.*YWJjIDE1MzE1NDE1NSAwNTIyNTExMjQ="
