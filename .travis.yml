@@ -14,19 +14,16 @@ before_install:
  - sudo mv docker-compose /usr/local/bin
  - docker --version
  - docker-compose --version
+ - git clone https://github.com/bats-core/bats-core.git
+ - cd bats-core
+ - ./install.sh /usr/local
 
 script:
  - echo `date`
  - ./build-images.sh
  - ./start.sh 
- - sleep 60
+ - sleep 20
  - docker ps
- - docker logs pg2mongo_pg1_1
- - docker exec -it pg2mongo_mongo_1 bash /p2m.sh 1 2
- - docker logs pg2mongo_mongo_1
- - docker exec -it pg2mongo_pg2_1 bash /data_gen.sh
+ - cd test && bats bats/.
+ - cd && ./stop.sh
  - echo `date`
-
-#  - docker-compose build
-#  - docker-compose run test
-
