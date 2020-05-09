@@ -15,16 +15,13 @@ before_install:
  - docker --version
  - docker-compose --version
  - git clone https://github.com/bats-core/bats-core.git
- - cd bats-core
- - sudo ./install.sh /usr/local
+ - sudo ./bats-core/install.sh /usr/local
 
 script:
  - echo `date`
- - cd $HOME && ./build-images.sh
+ - ./build-images.sh
  - ./start.sh 
  - docker ps
  - cd test && bats bats/.
- - cd $HOME && ./stop.sh
+ - cd .. && ./stop.sh
  - echo `date`
-
-after_success: coveralls
