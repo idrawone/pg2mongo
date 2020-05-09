@@ -20,10 +20,9 @@ before_install:
 
 script:
  - echo `date`
- - ./build-images.sh
+ - cd $HOME && ./build-images.sh
  - ./start.sh 
- - sleep 20
  - docker ps
  - cd test && bats bats/.
- - cd && ./stop.sh
+ - cd $HOME && ./stop.sh
  - echo `date`
