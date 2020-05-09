@@ -17,6 +17,7 @@ RUN echo "mongod ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/mongod && \
 		chmod 0440 /etc/sudoers.d/mongod
 RUN echo "export PATH=/usr/pgsql-12/bin:$PATH" | tee -a /root/.bashrc
 
+COPY p2m.sh .
 VOLUME  ["/data/db", "/var/lib/mongo", "/var/log/mongodb"]
 EXPOSE 27017
 

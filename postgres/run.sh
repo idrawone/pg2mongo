@@ -1,5 +1,5 @@
 #!/bin/bash
-set -m
+set -x
 
 PGDATA=/var/lib/pgsql/12/data
 VERFILE=$PGDATA/PG_VERSION

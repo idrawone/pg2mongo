@@ -14,14 +14,12 @@ before_install:
  - sudo mv docker-compose /usr/local/bin
  - docker --version
  - docker-compose --version
- - echo `which git`
- - echo $PWD
- - echo `uname -a`
 
 script:
  - echo `date`
  - ./build-images.sh
  - ./start.sh 
+ - sleep 60
  - docker ps
  - docker logs pg2mongo_pg1_1
  - docker exec -it pg2mongo_mongo_1 bash /p2m.sh 1 2
