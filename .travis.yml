@@ -26,3 +26,5 @@ script:
  - cd test && bats bats/.
  - cd $HOME && ./stop.sh
  - echo `date`
+
+after_success: coveralls
