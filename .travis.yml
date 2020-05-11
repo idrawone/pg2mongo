@@ -25,3 +25,7 @@ script:
  - cd test && bats bats/.
  - cd .. && ./stop.sh
  - echo `date`
+
+cache:
+  directories:
+    - $HOME/.pub-cache
