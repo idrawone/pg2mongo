@@ -56,7 +56,7 @@ package_make_install()
 install()
 {
 	wget https://github.com/idrawone/wal2mongo/files/4607765/wal2mongo_centos_7_binary.tar.gz
-	tar xzvf wal2mongo_centos_7_binary.tar.gz -C /usr/pgsql-12/
+	sudo tar xzvf wal2mongo_centos_7_binary.tar.gz -C /usr/pgsql-12/
 }
 
 build()
