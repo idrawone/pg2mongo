@@ -163,4 +163,16 @@ load assertions.bash
   assert_match "a.*YWJjIDE1MzE1NDE1NSAwNTIyNTExMjQ="
 }
 
+@test "$test_label TIMESTAMPTZ replication test" {
+  # change data
+  run docker exec -it pg2mongo_pg1_1 bash /psql.sh tc021-pg.txt
+  assert_success
+  
+  # check replication results
+  sleep 3;
+  run docker exec -it pg2mongo_mongo_1 bash /mongo.sh tc021-mg.txt
+  assert_success
+  assert_match "a.*2020-04-15T19:50:33Z"
+}
+
 
